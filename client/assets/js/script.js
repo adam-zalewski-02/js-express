@@ -1,3 +1,4 @@
+const BASEURL = 'http://localhost:3000'
 const GENRES = [{genre_id: 1, genre: 'Action'}, {genre_id: 2, genre: 'Adventure'}, {genre_id: 3, genre: 'Fantasy'}, {genre_id: 4, genre: 'Science Fiction'}, {genre_id: 5, genre: 'Crime'}, {genre_id: 6, genre: 'Drama'}, {genre_id: 7, genre: 'Thriller'}, {genre_id: 8, genre: 'Animation'}, {genre_id: 9, genre: 'Family'}, {genre_id: 10, genre: 'Western'}, {genre_id: 11, genre: 'Comedy'}, {genre_id: 12, genre: 'Romance'}, {genre_id: 13, genre: 'Horror'}, {genre_id: 14, genre: 'Mystery'}, {genre_id: 15, genre: 'History'}, {genre_id: 16, genre: 'War'}, {genre_id: 17, genre: 'Music'}, {genre_id: 18, genre: 'Documentary'}, {genre_id: 19, genre: 'Foreign'}, {genre_id: 20, genre: 'TV Movie'}];
 const MOVIES = [{'movie_id': 1, 'title': 'Avatar', 'overview': 'In the 22nd century, a paraplegic Marine is dispatched to the moon Pandora on a unique mission, but becomes torn between following orders and protecting an alien civilization.', 'runtime': 162, 'score': '7.2', 'release_date': '2009-12-10', 'imagename': 'MNE1kvzJ0UAFR3CMMzTQWbyRfe3.jpg'}, {'movie_id': 2, 'title': "Pirates of the Caribbean: At World's End", 'overview': 'Captain Barbossa, long believed to be dead, has come back to life and is headed to the edge of the Earth with Will Turner and Elizabeth Swann. But nothing is quite as it seems.', 'runtime': 169, 'score': '6.9', 'release_date': '2007-05-19', 'imagename': 'rAN1bRIOdy5lseZgBiaTMv9gpj7.jpg'}];
 const MOVIE_DETAILS = [
@@ -26,9 +27,9 @@ function genreListElement(genreId, genreName) {
     return `<li data-genre-id="${genreId}"><a href="?genre=${genreId}">${genreName}</a></li>`;
 }
 
-function addGenreButtons() {
+async function addGenreButtons() {
     const genreElement = document.querySelector("#genres");
-    const data = GENRES;
+    const data = await fetch(`${BASEURL}/genres`).then(resp => resp.json());
 
     genreElement.insertAdjacentHTML('beforeend', `<li data-genre-id="0"><a href="?genre=0">All</a></li>`)
     data.forEach(genreobject => {
