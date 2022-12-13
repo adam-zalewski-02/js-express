@@ -2,7 +2,6 @@ import express from 'express';
 import cors from 'cors';
 import basicAuth from 'express-basic-auth';
 import { Genre, Movie, Actor } from './logic/database/database-repository.js'; 
-//import { Actor } from './logic/data/mock/mock-repository.js';
 import { CustomError } from './logic/exceptions/errorhandling.js';
 
 const PORT = 3000;
@@ -58,13 +57,17 @@ app.get('/movies/:id', (req, res, next) => {
     .catch(err => next(err));
 });
 
-app.get('/actors', (req, res) => {
-  res.json(Actor.getAllActors());
+app.get('/actors', (req, res, next) => {
+  Actor.getAllActors()
+      .then(results => res.json(results))
+      .catch(err => next(err));
 });
 
-app.get('/actors/:id', (req, res) => {
+app.get('/actors/:id', (req, res, next) => {
   const id = parseInt(req.params.id);
-  res.json(Actor.getActorFromId(id));
+  Actor.getActorFromId(id)
+    .then(results => res.json(results))
+    .catch(err => next(err));
 });
 
 app.post('/actors', basicAuth({users: ADMIN_USERS}), (req, res) => {
