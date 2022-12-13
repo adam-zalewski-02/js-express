@@ -1,4 +1,5 @@
 import { actors, genres, movies, movie_actors, movie_genres } from './data/mockdata.js';
+import { UnexistingResourceError } from '../../exceptions/errorhandling.js';
 
 function getAllMovies(genreId) {
     let result = movies;
@@ -13,6 +14,9 @@ function hasGenre(movieId, genreId) {
 
 function getMovieFromId(id) {
     const movie = movies.find(movie => movie.movie_id === id);
+    if(movie === undefined) {
+        throw new UnexistingResourceError("Invalid id");
+    }
     return extendMovie(movie);
 }
 

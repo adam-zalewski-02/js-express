@@ -14,6 +14,16 @@ app.use(cors());
 
 app.use("/", express.static('public'));
 
+app.use((err, req, res, next) => {
+  if (err instanceof CustomError) 
+      res.status(err.statusCode).send(err.message);
+  else {
+      console.error(err);
+      res.status(500).send("Server error");
+  }
+});
+
+
 app.get('/genres', (req, res) => {
   res.json(Genre.getAllGenres());
 });
