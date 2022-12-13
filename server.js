@@ -1,5 +1,6 @@
 import express from 'express';
 import cors from 'cors';
+import basicAuth from 'express-basic-auth';
 import { Genre, Movie, Actor } from './logic/data/mock/mock-repository.js';
 import { CustomError } from './logic/exceptions/errorhandling.js';
 
@@ -7,6 +8,7 @@ const PORT = 3000;
 const SUCCESFULL_ADD = 201;
 const SUCCESFULL_UPDATE = 204;
 const SUCCESFULL_DELETE = 204;
+const ADMIN_USERS = {admin: '1234'};
 
 const app = express();
 
@@ -54,18 +56,18 @@ app.get('/actors/:id', (req, res) => {
   res.json(Actor.getActorFromId(id));
 });
 
-app.post('/actors', (req, res) => {
+app.post('/actors', basicAuth({users: ADMIN_USERS}), (req, res) => {
   Actor.create(req.body);
   res.status(SUCCESFULL_ADD).send();
 });
 
-app.put('/actors/:id', (req, res) => {
+app.put('/actors/:id', basicAuth({users: ADMIN_USERS}), (req, res) => {
   const id = parseInt(req.params.id);
   Actor.update(id, req.body);
     res.status(SUCCESFULL_UPDATE).send();
 });
 
-app.delete('/actors/:id', (req, res) => {
+app.delete('/actors/:id', basicAuth({users: ADMIN_USERS}), (req, res) => {
   const id = parseInt(req.params.id);
   Actor.remove(id);
   res.status(SUCCESFULL_DELETE).send();
