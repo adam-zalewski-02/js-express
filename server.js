@@ -1,6 +1,6 @@
 import express from 'express';
 import cors from 'cors';
-import { Genre, Movie } from './logic/data/mock/mock-repository.js';
+import { Genre, Movie, Actor } from './logic/data/mock/mock-repository.js';
 
 const PORT = 3000;
 
@@ -36,5 +36,14 @@ app.get('/movies', (req, res) => {
 app.get('/movies/:id', (req, res) => {
   const id = parseInt(req.params.id);
   res.json(Movie.getMovieFromId(id));
+});
+
+app.get('/actors', (req, res) => {
+  res.json(Actor.getAllActors());
+});
+
+app.get('/actors/:id', (req, res) => {
+  const id = parseInt(req.params.id);
+  res.json(Actor.getActorFromId(id));
 });
 
