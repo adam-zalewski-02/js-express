@@ -1,6 +1,6 @@
 import express from 'express';
 import cors from 'cors';
-import { Genre } from './logic/data/mock/mock-repository.js';
+import { Genre, Movie } from './logic/data/mock/mock-repository.js';
 
 const PORT = 3000;
 
@@ -16,5 +16,9 @@ app.use("/", express.static('public'));
 
 app.get('/genres', (req, res) => {
   res.json(Genre.getAllGenres());
+});
+
+app.get('/movies', (req, res) => {
+  res.json(Movie.getAllMovies());
 });
 
