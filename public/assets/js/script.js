@@ -6,6 +6,7 @@ const IMAGELOCATION = 'images'
 function init() {
     addGenreButtons();
     addMovies();
+    setPreviousNextLinks();
 
     document.querySelector("#close-button").addEventListener("click", e => {
         document.querySelector("main").classList.add("collapsed");
@@ -100,3 +101,15 @@ async function showMovieData(movieId) {
 }
 
 init();
+
+function setPreviousNextLinks() {
+    const pageNumber = Math.max(getIdParameter("page"), 1);
+    const currentGenre = getIdParameter("genre");
+    document.querySelector("#current-page").innerText = pageNumber;
+
+    if (pageNumber < 2) document.querySelector("#prev-page").classList.add("hidden");
+    else document.querySelector("#prev-page").classList.remove("hidden");
+
+    document.querySelector("#prev-page").href = `?genre=${currentGenre}&page=${pageNumber - 1}`;
+    document.querySelector("#next-page").href = `?genre=${currentGenre}&page=${pageNumber + 1}`;
+}

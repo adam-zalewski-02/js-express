@@ -1,7 +1,8 @@
 import express from 'express';
 import cors from 'cors';
 import basicAuth from 'express-basic-auth';
-import { Genre, Movie, Actor } from './logic/data/mock/mock-repository.js';
+import { Genre, Movie, Actor } from './logic/database/database-repository.js'; 
+//import { Actor } from './logic/data/mock/mock-repository.js';
 import { CustomError } from './logic/exceptions/errorhandling.js';
 
 const PORT = 3000;
@@ -9,6 +10,7 @@ const SUCCESFULL_ADD = 201;
 const SUCCESFULL_UPDATE = 204;
 const SUCCESFULL_DELETE = 204;
 const ADMIN_USERS = {admin: '1234'};
+const ITEMSPERPAGE = 20;
 
 const app = express();
 
@@ -33,13 +35,20 @@ app.use((err, req, res, next) => {
 });
 
 
-app.get('/genres', (req, res) => {
-  res.json(Genre.getAllGenres());
+app.get('/genres', (req, res, next) => {
+  Genre.getAllGenres()
+      .then(results => res.json(results))
+      .catch(err => next(err));
 });
 
-app.get('/movies', (req, res) => {
-  const genreid = parseInt(req.query.genre) || undefined;
-  res.json(Movie.getAllMovies(genreid));
+app.get('/movies', (req, res, next) => {
+  const genreId = parseInt(req.query.genre) || 0;
+  let page = parseInt(req.query.genre) || 0;
+  page = Math.max(1, page);
+
+  Movie.getAllMovies(genreId, (page - 1) * ITEMSPERPAGE, ITEMSPERPAGE)
+      .then(results => res.json(results))
+      .catch(err => next(err));
 });
 
 app.get('/movies/:id', (req, res) => {
