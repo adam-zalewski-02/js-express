@@ -1,10 +1,5 @@
 const BASEURL = 'http://localhost:3000'
-const GENRES = [{genre_id: 1, genre: 'Action'}, {genre_id: 2, genre: 'Adventure'}, {genre_id: 3, genre: 'Fantasy'}, {genre_id: 4, genre: 'Science Fiction'}, {genre_id: 5, genre: 'Crime'}, {genre_id: 6, genre: 'Drama'}, {genre_id: 7, genre: 'Thriller'}, {genre_id: 8, genre: 'Animation'}, {genre_id: 9, genre: 'Family'}, {genre_id: 10, genre: 'Western'}, {genre_id: 11, genre: 'Comedy'}, {genre_id: 12, genre: 'Romance'}, {genre_id: 13, genre: 'Horror'}, {genre_id: 14, genre: 'Mystery'}, {genre_id: 15, genre: 'History'}, {genre_id: 16, genre: 'War'}, {genre_id: 17, genre: 'Music'}, {genre_id: 18, genre: 'Documentary'}, {genre_id: 19, genre: 'Foreign'}, {genre_id: 20, genre: 'TV Movie'}];
-const MOVIES = [{'movie_id': 1, 'title': 'Avatar', 'overview': 'In the 22nd century, a paraplegic Marine is dispatched to the moon Pandora on a unique mission, but becomes torn between following orders and protecting an alien civilization.', 'runtime': 162, 'score': '7.2', 'release_date': '2009-12-10', 'imagename': 'MNE1kvzJ0UAFR3CMMzTQWbyRfe3.jpg'}, {'movie_id': 2, 'title': "Pirates of the Caribbean: At World's End", 'overview': 'Captain Barbossa, long believed to be dead, has come back to life and is headed to the edge of the Earth with Will Turner and Elizabeth Swann. But nothing is quite as it seems.', 'runtime': 169, 'score': '6.9', 'release_date': '2007-05-19', 'imagename': 'rAN1bRIOdy5lseZgBiaTMv9gpj7.jpg'}];
-const MOVIE_DETAILS = [
-    {"movie_id": 1, "title":"Avatar", "overview":"In the 22nd century, a paraplegic Marine is dispatched to the moon Pandora on a unique mission, but becomes torn between following orders and protecting an alien civilization.","runtime":162,"score":7.2,"release_date":"Thu Dec 10 2009","imagename":"MNE1kvzJ0UAFR3CMMzTQWbyRfe3.jpg","genres":["Action","Adventure","Fantasy","Science Fiction"],"actors":["Zoe Saldana","Sigourney Weaver","Stephen Lang","Michelle Rodriguez","Giovanni Ribisi","Joel David Moore","CCH Pounder","Wes Studi","Laz Alonso","Dileep Rao","Matt Gerald","Sean Anthony Moran","Jason Whyte","Scott Lawrence","Kelly Kilgour","James Patrick Pitt","Sean Patrick Murphy","Peter Dillon","Kevin Dorman","Kelson Henderson","David Van Horn","Jacob Tomuri","Michael Blain-Rozgay","Jon Curry","Luke Hawker","Woody Schultz","Peter Mensah","Sonia Yee","Jahnel Curfman","Ilram Choi","Kyla Warren","Lisa Roumain","Debra Wilson","Chris Mala","Taylor Kibby","Jodie Landau","Julie Lamm","Cullen B. Madden","Joseph Brady Madden","Frankie Torres","Austin Wilson","Sara Wilson","Tamica Washington-Miller","Lucy Briant","Nathan Meister","Gerry Blair","Matthew Chamberlain","Paul Yates","Wray Wilson","James Gaylyn","Melvin Leno Clark III","Carvon Futrell","Brandon Jelkes","Micah Moch","Hanniyah Muhammad","Christopher Nolen","Christa Oliver","April Marie Thomas","Bravita A. Threatt","Colin Bleasdale","Mike Bodnar","Matt Clayton","Nicole Dionne","Jamie Harrison","Allan Henry","Anthony Ingruber","Ashley Jeffery","Dean Knowsley","Joseph Mika-Hunt","Terry Notary","Kai Pantano","Logan Pithyou","Stuart Pollock","Raja","Gareth Ruck","Rhian Sheehan","T. J. Storm","Jodie Taylor","Alicia Vela-Bailey","Richard Whiteside","Nikie Zambo","Julene Renee"]},
-    {"movie_id": 2, "title":"Pirates of the Caribbean: At World's End", "overview":"Captain Barbossa, long believed to be dead, has come back to life and is headed to the edge of the Earth with Will Turner and Elizabeth Swann. But nothing is quite as it seems.","runtime":169,"score":6.9,"release_date":"Sat May 19 2007","imagename":"rAN1bRIOdy5lseZgBiaTMv9gpj7.jpg","genres":["Action","Adventure","Fantasy"],"actors":["Johnny Depp","Orlando Bloom","Keira Knightley","Stellan Skarsgård","Chow Yun-fat","Bill Nighy","Geoffrey Rush","Jack Davenport","Kevin McNally","Tom Hollander","Naomie Harris","Jonathan Pryce","Keith Richards","Lee Arenberg","Mackenzie Crook","Greg Ellis","David Bailie","Martin Klebba","David Schofield","Lauren Maher","Vanessa Branch","Angus Barnett","Giles New","Reggie Lee","Dominic Scott Kay","Takayo Fischer","David Meunier","Ho-Kwan Tse","Andy Beckwith","Peter Donald Badalamenti II","Christopher S. Capp","Hakeem Kae-Kazim","Ghassan Massoud"]}
-]
+
 
 const IMAGELOCATION = 'images'
 
@@ -54,7 +49,7 @@ function addMovieCard(movieObject) {
     return card;
 }
 
-function addMovies() {
+async function addMovies() {
     const movieelement = document.querySelector("#movie-list");
 
     movieelement.addEventListener("click", (e) => {
@@ -62,17 +57,17 @@ function addMovies() {
         if (clickedMovieId !== undefined) showMovieData(clickedMovieId);
     });
     
-    const data = MOVIES;
+    const data = await fetch(`${BASEURL}/movies?genre=${getIdParameter("genre")}`).then(result => result.json());
     data.forEach(movieObject => {
         const card = addMovieCard(movieObject);
         movieelement.appendChild(card);
     });
 }
 
-function showMovieData(movieId) {
+async function showMovieData(movieId) {
     const detailsElement = document.querySelector("#highlighted-movie");
 
-    const movieObject = MOVIE_DETAILS.find(movie => movie.movie_id === movieId);
+    const movieObject = await fetch(`${BASEURL}/movies/${movieId}`).then(res => res.json());
     detailsElement.querySelector("h2").innerText = movieObject.title;
 
     const imageElement = detailsElement.querySelector("img");

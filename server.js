@@ -19,6 +19,12 @@ app.get('/genres', (req, res) => {
 });
 
 app.get('/movies', (req, res) => {
-  res.json(Movie.getAllMovies());
+  const genreid = parseInt(req.query.genre) || undefined;
+  res.json(Movie.getAllMovies(genreid));
+});
+
+app.get('/movies/:id', (req, res) => {
+  const id = parseInt(req.params.id);
+  res.json(Movie.getMovieFromId(id));
 });
 
