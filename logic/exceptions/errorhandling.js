@@ -14,4 +14,10 @@ class UnexistingResourceError extends CustomError {
     }
 }
 
-export { CustomError, UnexistingResourceError }
+class BodyParsingError extends CustomError {
+    constructor(message) {
+        super(400, message);
+    }
+}
+
+export { CustomError, UnexistingResourceError, BodyParsingError }
