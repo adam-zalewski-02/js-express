@@ -1,0 +1,180 @@
+@font-face {
+  font-family: "BrutalBold";
+  src: url("../fonts/brutal-bold.woff2") format("woff2");
+}
+body {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+h1 {
+  font-size: 3rem;
+  padding: 1rem;
+  margin-bottom: 2rem;
+  font-family: "BrutalBold", Arial, Helvetica, sans-serif;
+  font-variant: small-caps;
+  background-color: #072a41;
+  text-align: center;
+  font-weight: bold;
+  color: white;
+}
+
+main #highlighted-movie {
+  position: fixed;
+  right: 0;
+  top: 0;
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+main #movie-list {
+  opacity: 0.5;
+}
+
+main.collapsed #movie-list {
+  opacity: 1;
+}
+
+main.collapsed #highlighted-movie {
+  display: none;
+}
+
+nav {
+  margin: 0 5rem;
+}
+
+nav {
+  text-align: center;
+}
+
+#genres {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+}
+#genres a {
+  color: white;
+  text-decoration: none;
+  display: block;
+  margin: 0.5rem;
+  padding: 0.5rem;
+  background-color: #328cc1;
+  border-radius: 0.5rem;
+}
+#genres a:hover, #genres a.active {
+  background-color: #d9b310;
+}
+
+#movie-list {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: flex-start;
+  justify-content: center;
+}
+#movie-list article {
+  margin: 1rem;
+  background-color: #0b3c5d;
+  width: min-content;
+  cursor: pointer;
+}
+#movie-list article h3 {
+  padding: 0.5rem;
+  color: white;
+  text-align: center;
+  font-size: 1.5rem;
+}
+
+#highlighted-movie article {
+  position: relative;
+  max-height: calc(100vh - 8rem);
+  overflow: scroll;
+  background-color: #0b3c5d;
+  width: 50%;
+  max-width: 40rem;
+  padding: 2rem;
+  text-align: center;
+  color: white;
+  border-radius: 1rem;
+  margin: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+#highlighted-movie article h2 {
+  color: white;
+  text-align: center;
+  margin: 1rem;
+  font-size: 3rem;
+  font-family: "BrutalBold", Arial, Helvetica, sans-serif;
+}
+#highlighted-movie article #movie-overview {
+  margin: 1rem 0;
+}
+#highlighted-movie article #movie-genres, #highlighted-movie article #movie-actors, #highlighted-movie article #movie-stats {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+}
+#highlighted-movie article #movie-genres li, #highlighted-movie article #movie-actors li, #highlighted-movie article #movie-stats li {
+  background-color: #328cc1;
+  margin: 0.5rem;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+}
+#highlighted-movie article #movie-stats li {
+  min-width: 3rem;
+  background-color: #d9b310;
+}
+#highlighted-movie article #movie-actors {
+  min-height: 3rem;
+  overflow: scroll;
+}
+#highlighted-movie article .close {
+  border: none;
+  background: url(../images/close.svg);
+  background-size: cover;
+  width: 2rem;
+  height: 2rem;
+  cursor: pointer;
+  position: absolute;
+  right: 1rem;
+  top: 1rem;
+}
+
+footer {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+footer div {
+  display: flex;
+  align-items: center;
+  font-size: 1.2rem;
+}
+footer strong {
+  font-weight: bold;
+}
+footer a {
+  display: block;
+}
+footer .next, footer .prev {
+  background-size: cover;
+  width: 2rem;
+  height: 2rem;
+}
+footer .next {
+  background: url(../images/next.svg);
+}
+footer .prev {
+  background: url(../images/prev.svg);
+}
+footer .hidden {
+  display: none;
+}
+
+/*# sourceMappingURL=style.css.map */
