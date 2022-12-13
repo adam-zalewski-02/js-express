@@ -5,8 +5,9 @@ const IMAGELOCATION = 'images'
 
 function init() {
     addGenreButtons();
-    addMovies();
     setPreviousNextLinks();
+    addMovies();
+    
 
     document.querySelector("#close-button").addEventListener("click", e => {
         document.querySelector("main").classList.add("collapsed");
@@ -58,7 +59,7 @@ async function addMovies() {
         if (clickedMovieId !== undefined) showMovieData(clickedMovieId);
     });
     
-    const data = await fetch(`${BASEURL}/movies?genre=${getIdParameter("genre")}`).then(result => result.json());
+    const data = await fetch(`${BASEURL}/movies?genre=${getIdParameter("genre")}&page=${getIdParameter("page")}`).then(result => result.json());
     data.forEach(movieObject => {
         const card = addMovieCard(movieObject);
         movieelement.appendChild(card);

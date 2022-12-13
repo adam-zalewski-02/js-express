@@ -43,7 +43,7 @@ app.get('/genres', (req, res, next) => {
 
 app.get('/movies', (req, res, next) => {
   const genreId = parseInt(req.query.genre) || 0;
-  let page = parseInt(req.query.genre) || 0;
+  let page = parseInt(req.query.page) || 0;
   page = Math.max(1, page);
 
   Movie.getAllMovies(genreId, (page - 1) * ITEMSPERPAGE, ITEMSPERPAGE)
