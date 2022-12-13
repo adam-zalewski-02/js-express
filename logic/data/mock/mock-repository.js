@@ -1,2 +1,4 @@
 import * as Genre from './genre.js';
-export { Genre }
+import * as Movie from './Movie.js';
+
+export { Genre, Movie }

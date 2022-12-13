@@ -12,6 +12,8 @@ app.listen(PORT, () =>
 
 app.use(cors());
 
+app.use("/", express.static('public'));
+
 app.get('/genres', (req, res) => {
   res.json(Genre.getAllGenres());
 });
