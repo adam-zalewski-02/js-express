@@ -51,9 +51,11 @@ app.get('/movies', (req, res, next) => {
       .catch(err => next(err));
 });
 
-app.get('/movies/:id', (req, res) => {
+app.get('/movies/:id', (req, res, next) => {
   const id = parseInt(req.params.id);
-  res.json(Movie.getMovieFromId(id));
+  Movie.getMovieFromId(id)
+    .then(results => res.json(results))
+    .catch(err => next(err));
 });
 
 app.get('/actors', (req, res) => {

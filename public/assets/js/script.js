@@ -81,7 +81,7 @@ async function showMovieData(movieId) {
 
     const genreElement = detailsElement.querySelector("#movie-genres");
     genreElement.innerHTML = "";
-    movieObject.genres.forEach(genre => {
+    movieObject.genreId.forEach(genre => {
         genreElement.insertAdjacentHTML('beforeend', `<li>${genre}</li>`)
     })
 
