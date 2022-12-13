@@ -1,0 +1,26 @@
+@use 'constants/colors';
+
+nav {
+    text-align: center;
+}
+
+#genres {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+
+    a{
+        color: white;
+        text-decoration: none;
+        display: block;
+        margin: 0.5rem;
+        padding: 0.5rem;
+
+        background-color: colors.$primary-color-light;
+        border-radius: 0.5rem;
+
+        &:hover, &.active {
+            background-color: colors.$accent-color;
+        }
+    }
+}

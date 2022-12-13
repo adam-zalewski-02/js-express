@@ -1,0 +1,40 @@
+@use "constants/colors";
+
+footer {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+
+    div {
+        display: flex;
+        align-items: center;
+        font-size: 1.2rem;
+    }
+
+    strong {
+        font-weight: bold;
+    }
+
+    a {
+        display: block;
+    }
+
+    .next, .prev {
+        background-size: cover;
+        width: 2rem;
+        height: 2rem;
+    }
+
+    .next {
+        background: url(../images/next.svg);
+    }
+
+    .prev {
+        background: url(../images/prev.svg);
+    }
+
+    .hidden {
+        display: none;
+    }
+}

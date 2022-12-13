@@ -1,0 +1,70 @@
+@use "constants/colors";
+@use "constants/fonts";
+
+#highlighted-movie article {
+    position: relative;
+    max-height: calc(100vh - 8rem);
+    overflow: scroll;
+    background-color: colors.$primary-color;
+    width: 50%;
+    max-width: 40rem;
+    padding: 2rem;
+    text-align: center;
+    color: white;
+    border-radius: 1rem;
+    margin: 2rem;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    h2 {
+        color: white;
+        text-align: center;
+        margin: 1rem;
+        font-size: 3rem;
+        font-family: fonts.$bolder-font;
+    }
+
+    #movie-overview {
+        margin: 1rem 0;
+    }
+
+    #movie-genres, #movie-actors, #movie-stats {
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: center;
+
+        li {
+            background-color: colors.$primary-color-light;
+            margin: 0.5rem;
+            padding: 0.5rem;
+            border-radius: 0.5rem;
+        }
+    }
+
+    #movie-stats {
+        li {
+            min-width: 3rem;
+            background-color: colors.$accent-color;
+        }
+    }
+
+    #movie-actors {
+        min-height: 3rem;
+        overflow: scroll;
+    }
+
+    .close {
+        border: none;
+        background: url(../images/close.svg);
+        background-size: cover;
+        width: 2rem;
+        height: 2rem;
+        cursor: pointer;
+
+        position: absolute;
+        right: 1rem;
+        top: 1rem;
+    }
+}

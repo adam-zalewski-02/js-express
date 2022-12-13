@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Database</title>
+    <link rel="stylesheet" href="assets/css/reset.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <script src="assets/js/script.js" defer></script>
+</head>
+<body>
+    <h1>Movie Database</h1>
+    <nav>
+        <ul id="genres"></ul>
+    </nav>
+    <main class="collapsed">
+        <div id="movie-list"></div>
+        <div id="highlighted-movie">
+            <article>
+                <h2>Movie title</h2>
+                <img src="#" title="#" alt="#">
+                <ul id="movie-stats"></ul>
+                <ul id="movie-genres"></ul>
+                <div id="movie-overview"></div>
+                <ul id="movie-actors"></ul>
+                <button id="close-button" class="close"></button>
+            </article>
+        </div>
+    </main>
+
+    <template id="movie-card">
+        <article data-movie-id="0">
+            <img src="#" title="#" alt="#">
+            <h3>Movie title</h3>
+        </article>
+    </template>
+</body>
+</html>

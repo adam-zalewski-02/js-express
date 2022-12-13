@@ -1,0 +1,23 @@
+@use "constants/colors";
+
+#movie-list {
+    display: flex;
+    flex-flow: row wrap;
+
+    align-items: flex-start;
+    justify-content: center;
+    
+    article {
+        margin: 1rem;
+        background-color: colors.$primary-color;
+        width: min-content;
+        cursor: pointer;
+        h3 {
+            padding: 0.5rem;
+            color: white;
+            text-align: center;
+            font-size: 1.5rem;
+        }
+
+    }
+}
