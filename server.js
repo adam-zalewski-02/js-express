@@ -70,21 +70,24 @@ app.get('/actors/:id', (req, res, next) => {
     .catch(err => next(err));
 });
 
-app.post('/actors', basicAuth({users: ADMIN_USERS}), (req, res) => {
-  Actor.create(req.body);
-  res.status(SUCCESFULL_ADD).send();
+app.post('/actors', basicAuth({users: ADMIN_USERS}), (req, res, next) => {
+  Actor.create(req.body)
+    .then(() => res.status(SUCCESFULL_ADD).send())
+    .catch(err => next(err));
 });
 
-app.put('/actors/:id', basicAuth({users: ADMIN_USERS}), (req, res) => {
+app.put('/actors/:id', basicAuth({users: ADMIN_USERS}), (req, res, next) => {
   const id = parseInt(req.params.id);
-  Actor.update(id, req.body);
-    res.status(SUCCESFULL_UPDATE).send();
+  Actor.update(id, req.body)
+    .then(() => res.status(SUCCESFULL_UPDATE).send())
+    .catch(err => next(err));
 });
 
-app.delete('/actors/:id', basicAuth({users: ADMIN_USERS}), (req, res) => {
-  const id = parseInt(req.params.id);
-  Actor.remove(id);
-  res.status(SUCCESFULL_DELETE).send();
+app.delete('/actors/:id', basicAuth({users: ADMIN_USERS}), (req, res, next) => {
+  const id = parseInt(req.params.id)
+  Actor.remove(id)
+    .then(() => res.status(SUCCESFULL_DELETE).send())
+    .catch(err => next(err));
 });
 
 
